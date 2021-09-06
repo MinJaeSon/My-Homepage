@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>My Study</title>
+    </head>
+    <body>
+        <h3>Study Schedule</h3>
+        <p>내가 공부한 것을 일주일 단위로 기록</p>
+
+        <script type="text/javascript">
+        function MyStudy() {    //사용자 정의 함수(객체) MyStudy
+            document.write("<h3>Study Schedule</h3>");  //document 객체 사용
+            document.write("<p>내가 공부한 것을 일주일 단위로 기록</p>");
+
+            document.write("<table border='1'>");
+            document.write("<tr>");
+            document.write("<th>과목</th> <th>공부시간</th>");
+            document.write("</tr>");
+            
+            //사용자 객체 생성
+            var sub1 = "객체";
+            var sub2 = "데구";
+            var sub3 = "웹프기";
+            var sub4 = "아기구";
+            var sub5 = "논리";
+            var sub6 = "문사테";
+            var all = sub1 + ", " + sub2 + ", " + sub3 + ", " + sub4 + ", " + sub5 + ", " + sub6 + "\n";
+
+            var total = 0;
+            for(i = 0; i < 6; i++) {
+                var sub = prompt("3학기 수강과목: " + all + "\n" + "공부한 과목: ", "");
+                var time = prompt("공부 시간: ");
+
+                switch(sub) {
+                    case "객체":
+                        subject = sub1;
+                        break;
+                    case "데구":
+                        subject = sub2;
+                        break;
+                    case "웹프기":
+                        subject = sub3;
+                        break;
+                    case "아기구":
+                        subject = sub4;
+                        break;
+                    case "논리":
+                        subject = sub5;
+                        break;
+                    case "문사테":
+                        subject = sub6;
+                        break;
+                    default:
+                        alert("수강하지 않는 과목입니다.");
+                        subject = "";
+                }
+
+                total = total + parseInt(time);
+
+                document.write("<tr>");
+                document.write("<td>" + subject + "</td>");
+                document.write("<td>" + time + "</td>");
+                document.write("</tr>");
+                
+            }
+            document.write("<tr>");
+            document.write("<th>총 공부시간</th>");
+            document.write("<td>" + total + "</td>");
+            document.write("</tr>");
+            document.write("</table>")
+        }
+        setTimeout(MyStudy, 3000);  //내장 함수 setTimeout 사용
+        </script>
+    </body>
+</html>

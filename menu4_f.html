@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Picture Diary</title>
+    </head>
+    <body>
+        <h2>그림 일기장^__^</h2>
+        <p>나의 하루를 기록하는 일기장</p>
+        <p>&nbsp;</p>
+        <form>
+            제목: 
+            <input type="text" name="title" size="60"/><br/>
+        </form>
+        <button onclick="getMyDate();">오늘은?</button>
+        <div id="date">날짜: </div>
+        
+        <img id="sunny" src="http://mm.sookmyung.ac.kr/~it2013716/images/sunny.png" width="40px" style="position:absolute; left:50px; top:245px; visibility: hidden;"/>
+        <img id="cloudy" src="http://mm.sookmyung.ac.kr/~it2013716/images/cloudy.png" width="40px" style="position:absolute; left:100px; top:245px; visibility: hidden;"/>
+        <img id="rainy" src="http://mm.sookmyung.ac.kr/~it2013716/images/rainy.png" width="40px" style="position:absolute; left:140px; top:245px; visibility: hidden;"/>
+        <img id="windy" src="http://mm.sookmyung.ac.kr/~it2013716/images/windy.png" width="40px" style="position:absolute; left:180px; top:245px; visibility: hidden;"/>
+        <img id="snowy" src="http://mm.sookmyung.ac.kr/~it2013716/images/snowy.png" width="40px" style="position:absolute; left:222px; top:245px; visibility: hidden;"/>
+      
+        날씨:
+        <button onclick="weatherExp('sunny');">화창</button>
+        <button onclick="weatherExp('cloudy');">구름</button>
+        <button onclick="weatherExp('rainy');">비</button>
+        <button onclick="weatherExp('windy');">바람</button>
+        <button onclick="weatherExp('snowy');">눈</button>
+        <p>&nbsp;</p>
+
+        <canvas id="myCanvas" width="501" height="400" style="border-style: solid;"
+        onmousedown="start();" onmousemove="draw();" onmouseup="stop();"></canvas>
+        
+        <form>
+            <textarea name="contents" cols="55" rows="10" 
+            style="font-family: 휴먼편지체; font-size: 14pt; border-style: solid; border-width: 2px;">오늘은 ~. 정말 재밌었다.</textarea>
+        </form>
+
+        <form>
+            <input type="button" value="저장" onclick="confirm('저장하시겠습니까?');"/>
+        </form>
+
+        <script type="text/javascript">
+            function getMyDate() {  //사용자 정의 함수(객체) getMyDate()
+            var today = new Date(); //Date 객체 사용
+            var y = today.getFullYear();    //y 객체 생성
+            var m = today.getMonth() + 1;   //m 객체 생성
+            var d = today.getDate();    //d 객체 생성
+            document.getElementById("date").innerHTML = '날짜: ' + y + '년 ' + m + '월 ' + d + '일    ';
+            } 
+
+            function weatherExp(id) {   //사용자 정의 함수(객체) weatherExp()
+            var dom = document.getElementById(id);      //document 객체 사용, dom 객체 생성
+            if(dom.style.visibility == "hidden") { 
+                dom.style.visibility = "visible";
+            } else {
+                dom.style.visibility = "hidden";
+            }
+            }
+
+            var canvas = document.getElementById("myCanvas");   //document 객체 사용, canvas 객체 생성
+            var context = canvas.getContext("2d");  //context 객체 생성
+        
+            var stopped = true;
+            function start() {  //사용자 정의 함수(객체) start()
+                e = window.event;   //window 객체
+                context.moveTo(e.clientX-10, e.clientY-10);
+                stopped = false;
+            }
+            function stop() {   //사용자 정의 함수(객체) stop()
+                stopped = true;
+            }
+            function draw() {   //사용자 정의 함수(객체) draw()
+                if(!stopped) {
+                    e = window.event;
+                    context.lineTo(e.clientX-10, e.clientY-10);
+                    context.stroke();    
+                }
+            }
+        </script>
+    </body>
+</html>
